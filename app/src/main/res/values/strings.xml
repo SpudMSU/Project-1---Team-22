@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Checkers</string>
-    <string name="buttonEnd">End Game</string>
+    <string name="buttonDone">Done</string>
+    <string name="buttonRes">Resign</string>
 </resources>
