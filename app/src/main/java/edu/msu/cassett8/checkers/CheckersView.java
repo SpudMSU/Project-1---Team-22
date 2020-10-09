@@ -36,7 +36,7 @@ public class CheckersView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
-        setBackgroundResource(R.drawable.checkerboard);
+        setBackgroundResource(R.drawable.checkersboard);
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.CheckersView, defStyle, 0);
 
