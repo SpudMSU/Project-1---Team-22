@@ -6,5 +6,8 @@
     <string name="player1">Player 1 Enter Name</string>
     <string name="player2">Player 2 Enter Name</string>
     <string name="startButton">Play</string>
+    <string name="winner">Player X is the winner!</string>
+    <string name="loser">Player Z is the loser!</string>
+    <string name="newGame">New Game</string>
 
 </resources>
