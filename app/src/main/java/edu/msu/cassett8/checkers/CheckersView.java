@@ -18,8 +18,10 @@ public class CheckersView extends View {
     private TextPaint mTextPaint;
     private float mTextWidth;
     private float mTextHeight;
+    private CheckerBoard board;
 
-    public CheckersView(Context context) {
+    public CheckersView(Context context)
+    {
         super(context);
         init(null, 0);
     }
@@ -36,7 +38,7 @@ public class CheckersView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
-        setBackgroundResource(R.drawable.checkersboard);
+        board = new CheckerBoard(getContext());
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.CheckersView, defStyle, 0);
 
@@ -47,17 +49,9 @@ public class CheckersView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
 
-        // Draw the text.
+        board.draw(canvas);
     }
 
 }
