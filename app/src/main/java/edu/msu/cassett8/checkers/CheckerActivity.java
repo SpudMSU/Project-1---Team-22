@@ -9,6 +9,6 @@ public class CheckerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.checkers_view);
+        setContentView(R.layout.welcome_layout);
     }
 }

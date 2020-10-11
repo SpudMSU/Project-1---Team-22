@@ -24,15 +24,15 @@ public class CheckerBoard {
         boardImage = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.checkersboard);
 
+        //spawn white checkers
         for (int i=0; i<12; i++) {
-
             pieces.add(new WhiteChecker(context,
                     R.drawable.spartan_white,
                     0));
         }
 
+        //spawn green checkers
         for (int i=0; i<12; i++) {
-
             pieces.add(new GreenChecker(context,
                     R.drawable.spartan_green,
                     0));
@@ -74,6 +74,7 @@ public class CheckerBoard {
         canvas.drawBitmap(boardImage, 0, 0, null);
         canvas.restore();
 
+        //draw all checker pieces
         for(CheckerPiece piece : pieces) {
             piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
@@ -86,7 +87,9 @@ public class CheckerBoard {
         //first 12 are white and first 12 are green. May also be other way around. I dont know. x and y range from 0-.95f.
 
         //example of setting their locations (randomly)
-        Random rand = new Random();
+        Random rand = new Random();//remov
+
+
         for(CheckerPiece piece : pieces) {
             piece.setCords(rand.nextFloat()*SCALE_IN_VIEW, rand.nextFloat()*SCALE_IN_VIEW);
         }
