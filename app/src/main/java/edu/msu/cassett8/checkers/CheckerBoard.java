@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class CheckerBoard {
 
-    final static float SCALE_IN_VIEW = 0.9f;
+    final static float SCALE_IN_VIEW = .95f;
 
     public ArrayList<CheckerPiece> pieces = new ArrayList<CheckerPiece>();
     /**
@@ -46,28 +46,32 @@ public class CheckerBoard {
 
     public void draw(Canvas canvas) {
 
-        int wid = canvas.getHeight();
-        int hit = canvas.getWidth();
+        int wid = canvas.getWidth();
+        int hit = canvas.getHeight();
 
         // Determine the minimum of the two dimensions
         int minDim = wid < hit ? wid : hit;
 
-        wid = boardImage.getHeight();
-        hit = boardImage.getWidth();
-
         int puzzleSize = (int)(minDim * SCALE_IN_VIEW);
-        //int marginX = (wid - puzzleSize) / 2;
 
-        float scaleFactor = (float)minDim /
-                ((float)boardImage.getHeight());
+        // Compute the margins so we center the puzzle
+        int marginX = (wid - puzzleSize) / 2;
+        int marginY = (hit - puzzleSize) / 2;
+
+        //
+        // Draw the outline of the puzzle
+        //
+
+        float scaleFactor = (float)puzzleSize / (float)boardImage.getWidth();
 
         canvas.save();
+        canvas.translate(marginX, marginY);
         canvas.scale(scaleFactor, scaleFactor);
         canvas.drawBitmap(boardImage, 0, 0, null);
         canvas.restore();
 
         for(CheckerPiece piece : pieces) {
-            piece.draw(canvas,0,0 , puzzleSize, scaleFactor);
+            piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
 
     }
