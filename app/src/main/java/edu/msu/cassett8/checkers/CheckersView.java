@@ -49,8 +49,6 @@ public class CheckersView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-
-
         board.draw(canvas);
     }
 

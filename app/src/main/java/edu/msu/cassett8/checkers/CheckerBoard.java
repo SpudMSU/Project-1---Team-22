@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class CheckerBoard {
 
+    int mPuzzleSize = -1;
+    boolean initialized = false;
     final static float SCALE_IN_VIEW = .95f;
 
     public ArrayList<CheckerPiece> pieces = new ArrayList<CheckerPiece>();
@@ -22,24 +24,18 @@ public class CheckerBoard {
         boardImage = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.checkersboard);
 
-        //you will want to set initial x and y here
-
         for (int i=0; i<12; i++) {
-            Random rand = new Random();
-            //spawn white
-            pieces.add(new CheckerPiece(context,
+
+            pieces.add(new WhiteChecker(context,
                     R.drawable.spartan_white,
-                    rand.nextFloat(),
-                    rand.nextFloat(), false));
+                    0));
         }
 
         for (int i=0; i<12; i++) {
-            Random rand = new Random();
-            //spawn white
-            pieces.add(new CheckerPiece(context,
+
+            pieces.add(new GreenChecker(context,
                     R.drawable.spartan_green,
-                    rand.nextFloat(),
-                    rand.nextFloat(), true));
+                    0));
         }
 
     }
@@ -49,10 +45,18 @@ public class CheckerBoard {
         int wid = canvas.getWidth();
         int hit = canvas.getHeight();
 
+        if(!initialized)
+        {
+            setInitialPos(wid, hit);
+            initialized=true;
+        }
+
         // Determine the minimum of the two dimensions
         int minDim = wid < hit ? wid : hit;
 
         int puzzleSize = (int)(minDim * SCALE_IN_VIEW);
+
+        int mPuzzleSize = puzzleSize;
 
         // Compute the margins so we center the puzzle
         int marginX = (wid - puzzleSize) / 2;
@@ -73,6 +77,18 @@ public class CheckerBoard {
         for(CheckerPiece piece : pieces) {
             piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
+    }
 
+    public void setInitialPos(int wid, int hit)
+    {
+        //code for setting initial positions of checkers
+
+        //first 12 are white and first 12 are green. May also be other way around. I dont know. x and y range from 0-.95f.
+
+        //example of setting their locations (randomly)
+        Random rand = new Random();
+        for(CheckerPiece piece : pieces) {
+            piece.setCords(rand.nextFloat()*SCALE_IN_VIEW, rand.nextFloat()*SCALE_IN_VIEW);
+        }
     }
 }

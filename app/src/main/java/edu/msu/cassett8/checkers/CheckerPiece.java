@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 
 public class CheckerPiece {
 
-    boolean isGreen = false;
     private Bitmap piece;
 
     /**
@@ -22,11 +21,13 @@ public class CheckerPiece {
      */
     private float y = 0;
 
-    public CheckerPiece(Context context, int id, float initX, float initY, boolean green) {
-        this.isGreen=green;
-        this.x=initX;
-        this.y=initY;
+    private int mNum; //number identifier for checker piece
+
+    public CheckerPiece(Context context, int id, int number) {
+
+        //based on checkernumber
         piece = BitmapFactory.decodeResource(context.getResources(), id);
+        mNum = number;
     }
     /**
      * Draw the puzzle piece
@@ -53,8 +54,9 @@ public class CheckerPiece {
         canvas.drawBitmap(piece, 0, 0, null);
         canvas.restore();
     }
-    boolean isGreen()
-    {
-        return isGreen;
+
+    public void setCords(float xCord, float yCord){
+        x= xCord;
+        y= yCord;
     }
 }
