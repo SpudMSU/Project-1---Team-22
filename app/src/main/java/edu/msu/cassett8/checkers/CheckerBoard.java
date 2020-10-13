@@ -14,7 +14,8 @@ public class CheckerBoard {
     boolean initialized = false;
     final static float SCALE_IN_VIEW = .95f;
 
-    public ArrayList<CheckerPiece> pieces = new ArrayList<CheckerPiece>();
+    public ArrayList<CheckerPiece> whitePieces = new ArrayList<CheckerPiece>();
+    public ArrayList<CheckerPiece> greenPieces = new ArrayList<CheckerPiece>();
     /**
      * Completed puzzle bitmap
      */
@@ -26,16 +27,17 @@ public class CheckerBoard {
 
         //spawn white checkers
         for (int i=0; i<12; i++) {
-            pieces.add(new WhiteChecker(context,
+            whitePieces.add(new WhiteChecker(context,
                     R.drawable.spartan_white,
                     0));
         }
 
         //spawn green checkers
         for (int i=0; i<12; i++) {
-            pieces.add(new GreenChecker(context,
+            greenPieces.add(new GreenChecker(context,
                     R.drawable.spartan_green,
                     0));
+
         }
 
     }
@@ -74,10 +76,16 @@ public class CheckerBoard {
         canvas.drawBitmap(boardImage, 0, 0, null);
         canvas.restore();
 
-        //draw all checker pieces
-        for(CheckerPiece piece : pieces) {
+        /*//draw all green checker pieces
+        for(CheckerPiece piece : greenPieces) {
+            piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
+        }*/
+
+        //draw all white checker pieces
+        for(CheckerPiece piece : whitePieces) {
             piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
+
     }
 
     public void setInitialPos(int wid, int hit)
@@ -87,11 +95,26 @@ public class CheckerBoard {
         //first 12 are white and first 12 are green. May also be other way around. I dont know. x and y range from 0-.95f.
 
         //example of setting their locations (randomly)
-        Random rand = new Random();//remov
+        Random rand = new Random();//remove
+        float shift = 0;
+        int count = 0;
 
-
-        for(CheckerPiece piece : pieces) {
+        for(CheckerPiece piece : greenPieces) {
             piece.setCords(rand.nextFloat()*SCALE_IN_VIEW, rand.nextFloat()*SCALE_IN_VIEW);
+        }
+
+        for(CheckerPiece piece : whitePieces) {
+
+            if (count <= 3) {
+                piece.setCords((0.123f * SCALE_IN_VIEW) + shift, (0.123f * SCALE_IN_VIEW));
+                shift = (shift + 0.218f);
+                count++;
+            }
+            if (count > 3 && count <= 7){
+                break;
+            }
+
+
         }
     }
 }
