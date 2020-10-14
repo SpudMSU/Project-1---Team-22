@@ -6,17 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class CheckerActivity extends AppCompatActivity {
+public class EndActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.checkers_view);
+        setContentView(R.layout.activity_end);
     }
 
-    public void onEndGame(View view) {
-        Intent intent = new Intent(this, EndActivity.class);
+    public void onRestartGame(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
 }
