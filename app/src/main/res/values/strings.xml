@@ -9,5 +9,8 @@
     <string name="winner">Player X is the winner!</string>
     <string name="loser">Player Z is the loser!</string>
     <string name="newGame">New Game</string>
+    <string name="buttonDesc">Select done to end game or resign to forfeit</string>
+    <string name="playerDesc">Player 1 is Green Player2 is White. Player1 goes first</string>
+    <string name="controlsDesc">Controls: select the peice to move then select the square to move it</string>
 
 </resources>
