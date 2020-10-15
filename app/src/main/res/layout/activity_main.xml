@@ -36,11 +36,18 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:onClick="onStartCheckers"
         android:text="@string/startButton" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5">
+
+    </FrameLayout>
 
 </LinearLayout>
