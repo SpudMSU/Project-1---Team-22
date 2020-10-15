@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +21,8 @@ public class CheckerBoard {
      * Completed puzzle bitmap
      */
     private Bitmap boardImage;
+
+    private Paint outlinePaint;
 
     public CheckerBoard(Context context){
         boardImage = BitmapFactory.decodeResource(context.getResources(),
@@ -70,16 +73,24 @@ public class CheckerBoard {
 
         float scaleFactor = (float)puzzleSize / (float)boardImage.getWidth();
 
+        outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        outlinePaint.setColor(0xff008000);
+        outlinePaint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(marginX, marginY,
+                marginX + puzzleSize, marginY + puzzleSize, outlinePaint);
         canvas.save();
         canvas.translate(marginX, marginY);
         canvas.scale(scaleFactor, scaleFactor);
         canvas.drawBitmap(boardImage, 0, 0, null);
         canvas.restore();
 
-        /*//draw all green checker pieces
+        
+
+
+        //draw all green checker pieces
         for(CheckerPiece piece : greenPieces) {
             piece.draw( canvas, marginX, marginY, puzzleSize, scaleFactor);
-        }*/
+        }
 
         //draw all white checker pieces
         for(CheckerPiece piece : whitePieces) {
@@ -96,24 +107,60 @@ public class CheckerBoard {
 
         //example of setting their locations (randomly)
         Random rand = new Random();//remove
-        float shift = 0;
-        int count = 0;
+        float whiteShift = 0;
+        float greenShift = 0;
+        int whiteCount = 0;
+        int greenCount = 0;
 
         for(CheckerPiece piece : greenPieces) {
-            piece.setCords(rand.nextFloat()*SCALE_IN_VIEW, rand.nextFloat()*SCALE_IN_VIEW);
+            if (greenCount <= 3) {
+                piece.setCords((0.195f * SCALE_IN_VIEW) + greenShift, (0.987f * SCALE_IN_VIEW));
+                greenShift = (greenShift + 0.25f);
+
+            }
+            if (greenCount == 4){
+                greenShift = 0;
+            }
+            if (greenCount > 3 && greenCount <= 7){
+                piece.setCords((0.065f * SCALE_IN_VIEW) + greenShift, (0.857f * SCALE_IN_VIEW));
+                greenShift = (greenShift + 0.25f);
+
+            }
+            if (greenCount == 7){
+                greenShift = 0;
+            }
+            if (greenCount > 7){
+                piece.setCords((0.195f * SCALE_IN_VIEW) + greenShift, (0.725f * SCALE_IN_VIEW));
+                greenShift = (greenShift + 0.25f);
+
+            }
+            greenCount++;
         }
 
         for(CheckerPiece piece : whitePieces) {
 
-            if (count <= 3) {
-                piece.setCords((0.123f * SCALE_IN_VIEW) + shift, (0.123f * SCALE_IN_VIEW));
-                shift = (shift + 0.218f);
-                count++;
-            }
-            if (count > 3 && count <= 7){
-                break;
-            }
+            if (whiteCount <= 3) {
+                piece.setCords((0.065f * SCALE_IN_VIEW) + whiteShift, (0.065f * SCALE_IN_VIEW));
+                whiteShift = (whiteShift + 0.25f);
 
+            }
+            if (whiteCount == 4){
+                whiteShift = 0;
+            }
+            if (whiteCount > 3 && whiteCount <= 7){
+                piece.setCords((0.195f * SCALE_IN_VIEW) + whiteShift, (0.195f * SCALE_IN_VIEW));
+                whiteShift = (whiteShift + 0.25f);
+
+            }
+            if (whiteCount == 7){
+                whiteShift = 0;
+            }
+            if (whiteCount > 7){
+                piece.setCords((0.065f * SCALE_IN_VIEW) + whiteShift, (0.33f * SCALE_IN_VIEW));
+                whiteShift = (whiteShift + 0.25f);
+
+            }
+            whiteCount++;
 
         }
     }
